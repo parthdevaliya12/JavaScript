@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM</title>
+  </head>
+  <body>
+    <ul class="lang">
+      <li>JavaScript</li>
+    </ul>
+  </body>
+  <script>
+    function addLang(langName){
+        const li = document.createElement('li');
+        li.innerHTML = `${langName}`
+        const lang = document.querySelector('.lang').appendChild(li)
+
+        
+    }
+    addLang('Python')
+    addLang('Java')
+
+    const edit = document.querySelector('li:nth-child(1)')
+    edit.outerHTML = '<li>TypeScript</li>'
+
+    const remove = document.querySelector('li:nth-child(3)')
+    remove.remove()
+  </script>
+</html>
