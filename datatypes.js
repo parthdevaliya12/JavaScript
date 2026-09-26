@@ -23,5 +23,5 @@ console.log("----------------------------------------");
 console.log(typeof num);
 console.log(typeof str);
 console.log(typeof isActive);
-console.log(typeof emptyValue);
+console.log(typeof emptyValue); 
 console.log(typeof notDefined);
