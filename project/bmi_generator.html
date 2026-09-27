@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Generator</title>
+  </head>
+  <body>
+    <div class="main">
+      <h1>BMI Calculate</h1>
+      <form>
+        Height :
+        <input type="text" placeholder="Height in cm" id="height" /> Weight :
+        <input type="text" placeholder="Weight in kg" id="weight" />
+        <button>Calculate</button>
+        <div class="result"></div>
+      </form>
+    </div>
+  </body>
+  <script>
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const height = parseInt(document.getElementById("height").value);
+      const weight = parseInt(document.getElementById("weight").value);
+
+      const result = document.querySelector(".result");
+
+      if (height <= 0 || isNaN(height)) {
+        result.innerHTML = "Please enter vaild height ";
+      } else if (weight <= 0 || isNaN(weight)) {
+        result.innerHTML = "Please enter vaild weight";
+      } else {
+        const bmi = (weight / ((height * height) / 10000)).toFixed(2);
+        result.innerHTML = `Result is = <span>${bmi}</span>`;
+      }
+    });
+  </script>
+</html>
