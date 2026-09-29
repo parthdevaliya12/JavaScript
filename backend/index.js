@@ -1,5 +1,8 @@
 import express from "express";
 import dotenv from "dotenv"
+import mongoose from "mongoose";
+import { dbConnect } from "./src/db/db.js";
+
 // import cors from "cors"
 
 
@@ -46,6 +49,10 @@ app.get('/api/student', (req, res) => {
     ]
     res.send(std)
 })
+
+
+dbConnect()
+
 
 app.listen(process.env.PORT, () => {
     console.log(`App is running on ${port}`);
