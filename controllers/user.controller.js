@@ -4,7 +4,7 @@ import userModel from "../models/user.model.js"
 
 export const register = async (req, res) => {
     try {
-        const { username, email, password, confirmPassword, avatar, address, dob, gender, phoneNo } = req.body
+        const { username, email, password, confirmPassword, address, dob, gender, phoneNo } = req.body
 
         let user = await userModel.findOne({ email })
         if (user) {
@@ -17,7 +17,10 @@ export const register = async (req, res) => {
         }
 
         let passHash = await bcrypt.hash(password, 10)
+
         let passConHash = await bcrypt.hash(confirmPassword, 10)
+
+        const avatar = req.file ? req.file.filename : "";
 
         let newUser = await userModel.create({
             username,
