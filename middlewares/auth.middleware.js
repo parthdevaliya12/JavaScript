@@ -1,20 +1,53 @@
-import jwt from "jsonwebtoken"
+// import jwt from "jsonwebtoken"
 
-export const auth = async (req, res, next) => {
+// export const auth = async (req, res, next) => {
+//     try {
+//         const token = req.headers.authorization.split("")[1]
+
+//         if (!token) {
+//             return res.status(400).json({ message: "Token not provided", success: false })
+//         }
+
+//         const verify = jwt.verify(token, process.env.JWT_SECRET)
+
+//         req.user = verify;
+
+//         next()
+
+//     } catch (error) {
+//         return res.status(401).json({ message: "Token invalid", success: false })
+//     }
+// }
+
+
+import jwt from "jsonwebtoken";
+
+export const auth = (req, res, next) => {
     try {
-        const token = req.headers.authorization.split("")[1]
+        const authHeader = req.headers.authorization;
 
-        if (!token) {
-            return res.status(400).json({ message: "Token not provided", success: false })
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return res.status(401).json({
+                message: "Token not provided",
+                success: false
+            });
         }
 
-        const verify = jwt.verify(token, process.env.JWT_SECRET)
+        const token = authHeader.split(" ")[1];
 
-        req.user = verify
+        const verify = jwt.verify(
+            token,
+            process.env.JWT_SECRET
+        );
 
-        next()
+        req.user = verify.id;
+
+        next();
 
     } catch (error) {
-        console.log(error);
+        return res.status(401).json({
+            message: "Token invalid or expired",
+            success: false
+        });
     }
-}
+};

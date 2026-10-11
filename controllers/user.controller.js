@@ -71,3 +71,85 @@ export const login = async (req, res) => {
         return res.status(500).json({ message: "Internal server error", success: false })
     }
 }
+
+
+export const getAllUser = async (req, res) => {
+    try {
+        const user = await userModel.find().select("-password").select("-confirmPassword")
+        if (!user) {
+            return res.status(404).json({ message: "User not found", success: false })
+        }
+
+        return res.status(200).json({ message: "User retrieve", success: true, user })
+
+
+    } catch (error) {
+        return res.status(500).json({ message: "Internal server error", success: false })
+    }
+}
+
+export const getSingleUser = async (req, res) => {
+    try {
+        const { id } = req.params
+        const user = await userModel.findById(id)
+        if (!user) {
+            return res.status(404).json({ message: "User not found", success: false })
+        }
+
+        return res.status(200).json({ message: "User retrieve", success: true, user })
+
+
+    } catch (error) {
+        return res.status(500).json({ message: "Internal server error", success: false })
+    }
+}
+
+export const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params
+        const user = await userModel.findByIdAndDelete(id)
+        if (!user) {
+            return res.status(404).json({ message: "User not found", success: false })
+        }
+
+        return res.status(200).json({ message: "User deleted", success: true, user })
+
+
+    } catch (error) {
+        return res.status(500).json({ message: "Internal server error", success: false })
+    }
+}
+
+
+export const editUser = async (req, res) => {
+    try {
+        const { id } = req.params
+        const { username, email, address, dob, gender, phoneNo } = req.body;
+        const user = await userModel.findByIdAndUpdate(
+            id,
+            {
+                username,
+                email,
+                address,
+                dob,
+                gender,
+                phoneNo
+            },
+            {
+                new: true,
+                runValidators: true
+            }
+        ).select("-password -confirmPassword");
+        
+        if (!user) {
+            return res.status(404).json({ message: "User not found", success: false })
+        }
+
+        return res.status(200).json({ message: "User edited", success: true, user })
+
+
+    } catch (error) {
+        return res.status(500).json({ message: "Internal server error", success: false })
+    }
+}
+
