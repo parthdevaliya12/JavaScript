@@ -10,7 +10,7 @@ import { useState } from "react";
 const Count = () => {
   const dispatch = useDispatch();
   const count = useSelector((state) => state.counter.value);
-  const [num, setNum] = useState(5);
+  const [num, setNum] = useState("");
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="flex justify-center items-center flex-col gap-10">
