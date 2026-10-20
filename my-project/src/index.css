@@ -1,1 +1,18 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+html {
+  scroll-behavior: smooth;
+  background: #000;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: "Space Grotesk", sans-serif;
+}

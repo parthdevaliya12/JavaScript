@@ -93,8 +93,34 @@ const App = () => {
                 </div>
 
                 {/* Footer */}
-                <footer className="mt-10 border-t border-neutral-200 px-4 py-8 text-center text-xs text-neutral-400">
-                  FRAME. — A space for visual discovery.
+
+                <footer className="border-t border-neutral-200 bg-white px-4 py-8 sm:px-6">
+                  <div className="mx-auto flex max-w-[1600px] flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
+                    <p className="text-sm font-semibold tracking-tight text-black">
+                      FRAME<span className="text-neutral-400">.</span>
+                    </p>
+
+                    <p className="text-xs leading-5 text-neutral-500 sm:text-sm">
+                      © {new Date().getFullYear()} FRAME. All rights reserved.
+                      <span className="mx-2 hidden text-neutral-300 sm:inline">
+                        |
+                      </span>
+                      <span className="block sm:inline">
+                        Designed with care by Parth Devaliya.
+                      </span>
+                    </p>
+
+                    <a
+                      href="#top"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className="text-xs font-medium text-neutral-500 transition-colors hover:text-black"
+                    >
+                      Back to top ↑
+                    </a>
+                  </div>
                 </footer>
               </>
             }
