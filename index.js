@@ -47,6 +47,38 @@ app.get('/fetch', (req, res) => {
         }
     })
 })
+
+app.put('/edit/:id', (req, res) => {
+    const id = req.params.id
+    const name = req.body.name
+    const edit = "UPDATE demo SET name=$1 WHERE id=$2"
+    con.query(edit, [name, id], (err, result) => {
+        if (err) {
+            res.send(err)
+        } else {
+            console.log(result);
+            res.send("Updated")
+        }
+    })
+})
+
+
+app.delete('/remove/:id', (req, res) => {
+    const id = req.params.id
+    const edit = "DELETE FROM demo WHERE id=$1"
+    con.query(edit, [id], (err, result) => {
+        if (err) {
+            res.send(err)
+        } else {
+            console.log(result);
+            res.send("Deleted")
+        }
+    })
+})
+
+
+
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 })
