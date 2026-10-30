@@ -35,6 +35,18 @@ app.post('/add', (req, res) => {
         }
     })
 })
+
+app.get('/fetch', (req, res) => {
+    const fetch = "SELECT * FROM demo"
+    con.query(fetch, (err, result) => {
+        if (err) {
+            res.send(err)
+        } else {
+            console.log(result.rows);
+            res.send("Fetched")
+        }
+    })
+})
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 })
